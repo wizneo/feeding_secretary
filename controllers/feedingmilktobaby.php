@@ -12,7 +12,7 @@ class Feedingmilktobaby extends CI_Controller {
 			'type' => 'buttons',
 			'buttons' => array('메뉴1','메뉴2','메뉴3')
 		);
-		json_encode($value);
+		json_encode($output_data);
 		return $output_data;
 		$this->load->view('memo_index', $output_data);
 	}
