@@ -21,7 +21,7 @@ class Feedingmilktobaby extends CI_Controller {
 		$input_data = array(
 			'user_key' => $this->input->post('user_key'),
 			'type' => $this->input->post('type'),
-			'contents' => $this->input->post('contents')
+			'content' => $this->input->post('content')
 		);
 		//$this->message->insert_message($input_data);	
 	}
