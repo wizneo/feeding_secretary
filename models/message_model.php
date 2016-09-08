@@ -1,13 +1,13 @@
 <?php
 class Message_model extends CI_Model {
-	private static $table_message = 'fd_mesaage';
+	private static $table_message = 'fd_message';
 	public function __construct() {
 		parent::__construct();
 	}
 
-	public function insert_mesaage($data) {
+	public function insert_message($data) {
 		$data['reg_dtm'] = date('Y-m-d h:i:s');
-		$this->db->insert(self::$table_mesaage, $data);
+		$this->db->insert(self::$table_message, $data);
 	}
 
 	public function get_list() {
