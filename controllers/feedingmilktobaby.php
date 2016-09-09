@@ -19,20 +19,22 @@ class Feedingmilktobaby extends CI_Controller {
 	}
 
 	public function message() {
+		$input_data = json_decode(file_get_contents('php://input'));
+		$user_key = $input_data->user_key;
+		$type = $input_data->type;
+		$content = $input_data->content;
 		$input_data = array(
-			'user_key' => $this->input->post('user_key'),
-			'type' => $this->input->post('type'),
-			'content' => $this->input->post('content')
+			'user_key' => $user_key,
+			'type' => $type,
+			'content' => $content
 		);
-		$input_data = json_decode(file_get_contents('php://input'));//$this->input->raw_input_stream);
-		$msg = $input_data->content;
 		$output_data = array(
 			'message' => array(
-				'text' => $msg
+				'text' => $content
 				)
 		);
+		$this->message->insert_message($input_data);	
 		echo json_encode($output_data);
-		//$this->message->insert_message($input_data);	
 	}
 
 	public function save() {
