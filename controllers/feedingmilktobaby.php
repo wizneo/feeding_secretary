@@ -9,9 +9,10 @@ class Feedingmilktobaby extends CI_Controller {
 
 	public function keyboard() {
 		$output_data = array(
-			'type' => 'text',
-			'buttons' => array('메뉴1','메뉴2','메뉴3')
+			'type' => 'text'
+//			'buttons' => array('temp');//$this->input->post('user_key');
 		);
+		
 		$output_data = json_encode($output_data);
 		echo $output_data;
 		//$this->load->view('memo_index', $output_data);
@@ -23,6 +24,14 @@ class Feedingmilktobaby extends CI_Controller {
 			'type' => $this->input->post('type'),
 			'content' => $this->input->post('content')
 		);
+		$input_data = json_decode(file_get_contents('php://input'));//$this->input->raw_input_stream);
+		$msg = $input_data->content;
+		$output_data = array(
+			'message' => array(
+				'text' => $msg
+				)
+		);
+		echo json_encode($output_data);
 		//$this->message->insert_message($input_data);	
 	}
 
