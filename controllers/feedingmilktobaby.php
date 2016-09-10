@@ -42,7 +42,7 @@ class Feedingmilktobaby extends CI_Controller {
 		echo json_encode($output_data);
 	}
 	
-	public function friend() {
+	public function friend($param) {
 		$input_data = $this->getInput();
 		$user_key = $input_data->user_key;
 		$input_data = array(
@@ -53,8 +53,10 @@ class Feedingmilktobaby extends CI_Controller {
 			$this->user->insert_user($input_data);
 		}
 		else if ($method == "DELETE") {
-			echo "what the fuck!";
-			$this->user->delete_user($input_data);
+			$this->user->delete_user(array(
+					'user_key' => $param
+				)
+			);
 		}
 	}
 
