@@ -11,7 +11,7 @@ class Address_model extends CI_Model {
 			return "NO_DATA";
 		}
 		else {
-			return $query->result()[0];
+//			return $query->result()[0];
 		}
 	}
 
@@ -21,8 +21,8 @@ class Address_model extends CI_Model {
 		$query_result = $this->db->update(self::$table_address, $update_data);
 
 		$query = $this->db->query("SELECT name, address FROM `address_base` WHERE `no` = '$no' LIMIT 1", false);
-		$name = $query->result()[0]->name;
-		$address = $query->result()[0]->address;
+//		$name = $query->result()[0]->name;
+//		$address = $query->result()[0]->address;
 
 		$update_data = array('name' => $name);
 		$this->db->where('address', $address);
