@@ -48,7 +48,7 @@ class Feedingmilktobaby extends CI_Controller {
 	
 	public function friend($param = null) {
 		$method = $this->input->server('REQUEST_METHOD');
-		if ($method != "POST" || $method != "DELETE") {
+		if ($method != "POST" && $method != "DELETE") {
 			return;
 		}
 		$input_data = $this->getInput();
@@ -67,7 +67,7 @@ class Feedingmilktobaby extends CI_Controller {
 
 	public function chat_room($param = null) {
 		$method = $this->input->server('REQUEST_METHOD');
-		if ($method != "DELETE" && $param == null) {
+		if ($method != "DELETE" || $param == null) {
 			return;
 		}
 		$this->user->unjoin_user(array(
