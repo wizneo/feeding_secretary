@@ -1,5 +1,5 @@
 <?php
-class AccountBook extends CI_Controller {
+class Memo extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Memo_model','memo',true);
@@ -11,7 +11,7 @@ class AccountBook extends CI_Controller {
 		$output_data = array(
 			'memo_list' => $this->memo->get_list(),
 			);
-		$this->load->view('accountbook/main', $output_data);
+		$this->load->view('memo_index', $output_data);
 	}
 
 	public function form() {

@@ -81,7 +81,7 @@
 
 	<div id="body">
 		<ul>
-			<li><p><?echo date('Y-m-d');?> : 현재 공사중입니다.</p></li>
+			<li><p><?php echo date('Y-m-d H:i:s'); ?> : 현재 공사중입니다.</p></li>
 		</ul>
 	</div>
 
