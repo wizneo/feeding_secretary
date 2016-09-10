@@ -24,6 +24,7 @@ class Feedingmilktobaby extends CI_Controller {
 	}
 	public function message() {
 		$input_data = $this->getInput();
+
 		$user_key = $input_data->user_key;
 		$type = $input_data->type;
 		$content = $input_data->content;
@@ -44,6 +45,7 @@ class Feedingmilktobaby extends CI_Controller {
 	public function friend() {
 		$input_data = $this->getInput();
 		$user_key = $input_data->user_key;
+		$method = $this->input->server('REQUEST_METHOD');
 		$input_data = array(
 			'user_key' => $user_key
 		);
