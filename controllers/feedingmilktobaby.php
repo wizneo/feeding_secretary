@@ -42,7 +42,7 @@ class Feedingmilktobaby extends CI_Controller {
 		echo json_encode($output_data);
 	}
 	
-	public function friend($param) {
+	public function friend($param = null) {
 		$input_data = $this->getInput();
 		$method = $this->input->server('REQUEST_METHOD');
 		if ($method == "POST") {
@@ -50,7 +50,7 @@ class Feedingmilktobaby extends CI_Controller {
 				'user_key' => $user_key
 			));
 		}
-		else if ($method == "DELETE" && $param != "") {
+		else if ($method == "DELETE" && $param != null) {
 			$this->user->delete_user(array(
 					'user_key' => $param
 				)
