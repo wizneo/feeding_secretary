@@ -7,14 +7,14 @@ class Fd_user_model extends CI_Model {
 
 	public function insert_user($data) {
 		$data['active_yn'] = 'Y';
-		$data['reg_dtm'] = date('Y-m-d h:i:s');
-		$data['upd_dtm'] = date('Y-m-d h:i:s');
+		$data['reg_dtm'] = date('Y-m-d H:i:s');
+		$data['upd_dtm'] = date('Y-m-d H:i:s');
 		$this->db->insert(self::$table_user, $data);
 	}
 	
 	public function delete_user($data) {
 		$data['active_yn'] = 'N';
-		$data['upd_dtm'] = date('Y-m-d h:i:s');
+		$data['upd_dtm'] = date('Y-m-d H:i:s');
 		$this->db->where('user_key', $data['user_key']);
 		$this->db->where('active_yn', 'Y');
 		$this->db->update(self::$table_user, $data);

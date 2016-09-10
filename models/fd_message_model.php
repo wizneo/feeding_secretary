@@ -6,7 +6,7 @@ class Fd_message_model extends CI_Model {
 	}
 
 	public function insert_message($data) {
-		$data['reg_dtm'] = date('Y-m-d h:i:s');
+		$data['reg_dtm'] = date('Y-m-d H:i:s');
 		$this->db->insert(self::$table_message, $data);
 	}
 

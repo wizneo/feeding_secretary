@@ -6,8 +6,8 @@ class Memo_model extends CI_Model {
 	}
 
 	public function insert_memo($data) {
-		$data['created_dt'] = date('Y-m-d h:i:s');
-		$data['modified_dt'] = date('Y-m-d h:i:s');
+		$data['created_dt'] = date('Y-m-d H:i:s');
+		$data['modified_dt'] = date('Y-m-d H:i:s');
 		$this->db->insert(self::$table_memo, $data);
 	}
 
