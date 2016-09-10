@@ -47,7 +47,7 @@ class Feedingmilktobaby extends CI_Controller {
 		$method = $this->input->server('REQUEST_METHOD');
 		if ($method == "POST") {
 			$this->user->insert_user(array(
-				'user_key' => $user_key
+				'user_key' => $input_data->user_key
 			));
 		}
 		else if ($method == "DELETE" && $param != null) {
