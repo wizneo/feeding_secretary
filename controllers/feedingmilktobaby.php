@@ -42,7 +42,11 @@ class Feedingmilktobaby extends CI_Controller {
 				'text' => $content
 				)
 		);
-		$this->message->insert_message($input_data);	
+		$this->message->insert_message($input_data);
+		$this->user->join_user(array(
+				'user_key' => $user_key
+			)
+		);	
 		echo json_encode($output_data);
 	}
 	

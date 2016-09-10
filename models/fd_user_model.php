@@ -28,6 +28,14 @@ class Fd_user_model extends CI_Model {
 		$this->db->where('active_yn', 'Y');
 		$this->db->update(self::$table_user, $data);
 	}
+	
+	public function join_user($data) {
+		$data['in_chat'] = 'Y';
+		$data['upd_dtm'] = date('Y-m-d H:i:s');
+		$this->db->where('user_key', $data['user_key']);
+		$this->db->where('active_yn', 'Y');
+		$this->db->update(self::$table_user, $data);
+	}
 
 	public function get_list() {
 		$query = $this->db->get_where(self::$table_memo, array('del_yn' => 'N'));
