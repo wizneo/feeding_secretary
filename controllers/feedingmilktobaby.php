@@ -66,6 +66,7 @@ class Feedingmilktobaby extends CI_Controller {
 	}
 
 	public function chat_room($param = null) {
+		$method = $this->input->server('REQUEST_METHOD');
 		if ($method != "DELETE" && $param == null) {
 			return;
 		}
