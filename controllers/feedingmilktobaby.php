@@ -4,7 +4,6 @@ class Feedingmilktobaby extends CI_Controller {
 		parent::__construct();
  		$this->load->model('Fd_message_model','message',true);
  		$this->load->model('Fd_user_model','user',true);
- 		$this->load->model('Fd_chatting_model','chatting',true);
 // 		$this->load->helper('url');
 	}
 
