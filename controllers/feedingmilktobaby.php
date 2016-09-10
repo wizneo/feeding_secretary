@@ -45,11 +45,16 @@ class Feedingmilktobaby extends CI_Controller {
 	public function friend() {
 		$input_data = $this->getInput();
 		$user_key = $input_data->user_key;
-		$method = $this->input->server('REQUEST_METHOD');
 		$input_data = array(
 			'user_key' => $user_key
 		);
-		$this->user->insert_user($input_data);
+		$method = $this->input->server('REQUEST_METHOD');
+		if ($method == "POST") {
+			$this->user->insert_user($input_data);
+		}
+		else if ($method == "DELETE") {
+			$this->user->delete_user($input_data);
+		}
 	}
 
 	public function save() {

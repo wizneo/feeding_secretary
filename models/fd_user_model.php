@@ -11,6 +11,14 @@ class Fd_user_model extends CI_Model {
 		$data['upd_dtm'] = date('Y-m-d h:i:s');
 		$this->db->insert(self::$table_user, $data);
 	}
+	
+	public function delete_user($data) {
+		$data['active_yn'] = 'N';
+		$data['upd_dtm'] = date('Y-m-d h:i:s');
+		$this->db->where('user_key', $data['user_key']);
+		$this->db->where('active_yn', 'Y');
+		$this->db->update(self::$table_user, $data);
+	}
 
 	public function get_list() {
 		$query = $this->db->get_where(self::$table_memo, array('del_yn' => 'N'));
