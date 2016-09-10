@@ -4,6 +4,7 @@ class Feedingmilktobaby extends CI_Controller {
 		parent::__construct();
  		$this->load->model('Fd_message_model','message',true);
  		$this->load->model('Fd_user_model','user',true);
+ 		$this->load->model('Fd_chatting_model','chatting',true);
 // 		$this->load->helper('url');
 	}
 
@@ -23,6 +24,10 @@ class Feedingmilktobaby extends CI_Controller {
 		return json_decode(file_get_contents('php://input'));
 	}
 	public function message() {
+		$method = $this->input->server('REQUEST_METHOD');
+		if ($method != "POST") {
+			return;
+		}
 		$input_data = $this->getInput();
 
 		$user_key = $input_data->user_key;
@@ -43,8 +48,11 @@ class Feedingmilktobaby extends CI_Controller {
 	}
 	
 	public function friend($param = null) {
-		$input_data = $this->getInput();
 		$method = $this->input->server('REQUEST_METHOD');
+		if ($method != "POST" || $method != "DELETE") {
+			return;
+		}
+		$input_data = $this->getInput();
 		if ($method == "POST") {
 			$this->user->insert_user(array(
 				'user_key' => $input_data->user_key
@@ -58,6 +66,16 @@ class Feedingmilktobaby extends CI_Controller {
 		}
 	}
 
+	public function chat_room($param = null) {
+		if ($method != "DELETE" && $param == null) {
+			return;
+		}
+		$this->user->unjoin_user(array(
+				'user_key' => $param
+			)
+		);
+	}
+	
 	public function save() {
 		$contents = $this->input->post('contents');
 		$title = strlen($this->input->post('title')) == 0 ? substr($contents, 0, 50) : $this->input->post('title');
