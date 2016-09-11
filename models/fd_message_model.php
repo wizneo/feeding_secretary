@@ -9,8 +9,22 @@ class Fd_message_model extends CI_Model {
 		$data['reg_dtm'] = date('Y-m-d H:i:s');
 		$this->db->insert(self::$table_message, $data);
 	}
+	
+	public function insert_feeding_hst($data) {
+		$data['reg_dtm'] = date('Y-m-d H:i:s');
+		$data['msg_no'] = $this->get_max_no($data->user_key);
+		$this->db->insert(self::$table_message, $data);
+	}
+	
+	private function get_max_no($user_key) {
+		$this->db->where('user_key', $user_key);
+		$this->db->select_max('no');
+		$query = $this->db->get(self::$table_message);
+		$result_arr = $query->result();
+		return $result_arr[0]->no;
+	}
 
-	public function get_list() {
+	public function get_list($user_key) {
 		$query = $this->db->get_where(self::$table_memo, array('del_yn' => 'N'));
 		$memo_list = array();
 		if ($query->num_rows() > 0) {
