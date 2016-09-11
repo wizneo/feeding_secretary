@@ -7,7 +7,7 @@ class Fd_user_model extends CI_Model {
 
 	public function insert_user($data) {
 		$data['active_yn'] = 'Y';
-		$data['in_chat'] = 'Y';
+		$data['in_chat'] = 'N';
 		$data['reg_dtm'] = date('Y-m-d H:i:s');
 		$data['upd_dtm'] = date('Y-m-d H:i:s');
 		$this->db->insert(self::$table_user, $data);
