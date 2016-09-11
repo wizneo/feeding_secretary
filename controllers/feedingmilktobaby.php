@@ -76,12 +76,12 @@ class Feedingmilktobaby extends CI_Controller {
 		if (trim($content) == '야' || trim($content) == '수유비서') {
 			$out_message = $this->get_help_msg();
 		}
-		// 메세지 분석 
-		$analized_msg = $this->anaylize_message($content);
-		
-		if ($$analized_msg->result == 'FAIL') {
-			$out_message = "인식할 수 없는 형태의 명령입니다. 명령의 예를 보려면 '야' 또는 '수유비서'라고 불러주세요.";
-		}
+//		// 메세지 분석 
+//		$analized_msg = $this->anaylize_message($content);
+//		
+//		if ($$analized_msg->result == 'FAIL') {
+//			$out_message = "인식할 수 없는 형태의 명령입니다. 명령의 예를 보려면 '야' 또는 '수유비서'라고 불러주세요.";
+//		}
 		// 수유 기록  저장
 		$hst_data = array(
 			'user_key' => $user_key,
@@ -90,16 +90,18 @@ class Feedingmilktobaby extends CI_Controller {
 		);
 		$this->message->insert_feeding_hst($hst_data);
 		
-		// 통계 추출
-		$output_data = array(
-			'message' => array(
-				'text' => $content
-				)
-		);
+		// 사용자를 채팅 중 상태로 변경
 		$this->user->join_user(array(
 				'user_key' => $user_key
 			)
 		);	
+		
+		// 메세지 출력
+		$output_data = array(
+			'message' => array(
+				'text' => $out_message
+				)
+		);
 		echo json_encode($output_data);
 	}
 	
