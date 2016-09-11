@@ -8,8 +8,8 @@ class Test extends CI_Controller {
 
 
 	public function index() {
-		$str = "11시20분 120ml";
-		print_r(preg_split("/[ 시분:미리(ml)]+/", $str));
+		$msg = "1:20 120";
+		print_r(preg_split("/[ 시분:]+/", $msg));
 //		$output_data = array(
 //			'memo_list' => $this->memo->get_list(),
 //			);
