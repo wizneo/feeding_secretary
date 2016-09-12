@@ -3,7 +3,7 @@
 ?>
 <html>
 <head>
-<script type="text/javascript" src="<?php base_url();?>/js/jquery-3.1.0.min.js" />
+<script type="text/javascript" src="<?=base_url();?>/js/jquery-3.1.0.min.js" />
 <script type="text/javascript">
 function sendMsg() {
 	
