@@ -15,6 +15,10 @@ class Test extends CI_Controller {
 //			);
 //		$this->load->view('accountbook/main', $output_data);
 	}
+	
+	public function send_msg() {
+		$this->load->view('test/send_msg');
+	}
 
 	public function form() {
 		$this->load->view('memo_form');	
