@@ -3,7 +3,7 @@ class Test extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 //		$this->load->model('Memo_model','memo',true);
-//		$this->load->helper('url');
+		$this->load->helper('url');
 	}
 
 
