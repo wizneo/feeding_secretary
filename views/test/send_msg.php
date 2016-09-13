@@ -16,8 +16,8 @@ var controller = {
 		    data: {
 			    user_key : 'test_user_key',
 			    type: 'text',
-			    content: $("#msg").val();
-		    }
+			    content: $("#msg").val()
+		    },
 		    success: function(result) {
 		        $("#response").val(result);
 		    }
