@@ -10,6 +10,11 @@ function sendMsg() {
 	    url: '/feedingmilktobaby/message/',
 	    type: 'POST',
 	    dataTyle: 'json',
+	    data: {
+		    user_key : 'test_user_key',
+		    type: 'text',
+		    content: $("#msg").val();
+	    }
 	    success: function(result) {
 	        $("#response").val(result);
 	    }
