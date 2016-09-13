@@ -7,11 +7,12 @@
 </head>
 <body>
 <script type="text/javascript">
+var aaaaa = "er";
 var controller = {
 	sendMsg : function () {
 		$.ajax({
 		    url: '/feedingmilktobaby/message/',
-		    type: 'POST',
+		    method: 'POST',
 		    dataTyle: 'json',
 		    data: {
 			    user_key : 'test_user_key',
