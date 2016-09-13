@@ -4,6 +4,8 @@
 <html>
 <head>
 <script type="text/javascript" src="<?=base_url();?>js/jquery-3.1.0.min.js" />
+</head>
+<body>
 <script type="text/javascript">
 var controller = {
 	sendMsg : function () {
@@ -23,8 +25,6 @@ var controller = {
 	}
 };
 </script>
-</head>
-<body>
 	<textarea id="msg"></textarea>
 	<input type="button" value="send msg" onclick="controller.sendMsg()" />
 	<textarea id="response"></textarea>
