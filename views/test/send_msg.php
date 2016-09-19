@@ -3,7 +3,8 @@
 ?>
 <html>
 <head>
-<script defer type="text/javascript" src="<?=base_url();?>js/jquery-3.1.0.min.js">
+<script type="text/javascript" src="<?=base_url();?>js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
 var aaaaa = "er";
 //var controller = {
 //	sendMsg : function () {
