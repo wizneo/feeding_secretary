@@ -29,7 +29,7 @@ class Feedingmilktobaby extends CI_Controller {
 			return;
 		}
 		$input_data = $this->getInput();
-		print_r($input_data);
+		
 		if ($method == "POST") {
 			$this->user->insert_user(array(
 				'user_key' => $input_data->user_key
@@ -60,7 +60,7 @@ class Feedingmilktobaby extends CI_Controller {
 			return;
 		}
 		$input_data = $this->getInput();
-
+		print_r($input_data);
 		$user_key = $input_data->user_key;
 		$type = $input_data->type;
 		$content = $input_data->content;
