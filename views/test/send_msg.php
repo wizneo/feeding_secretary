@@ -18,7 +18,7 @@ var controller = {
 		    },
 		    contentType : 'application/json; charset=utf-8',
 		    success: function(result) {
-		        $("#response").val(result);
+		        $("#response").html(result);
 		    }
 		});
 	}
@@ -28,6 +28,6 @@ var controller = {
 <body>
 	<textarea id="msg"></textarea>
 	<input type="button" value="send msg" onclick="controller.sendMsg()" />
-	<textarea id="response"></textarea>
+	<div id="response"></div>
 </body>
 </html>
