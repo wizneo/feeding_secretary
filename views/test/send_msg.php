@@ -11,7 +11,7 @@ var controller = {
 		    url: '/feedingmilktobaby/message/',
 		    method: 'POST',
 		    dataTyle: 'json',
-		    data: $("#msg_frm").serialize(),
+		    data: JSON.stringify($("#msg_frm").serialize()),
 		    contentType : 'application/json; charset=utf-8',
 		    success: function(result) {
 		        $("#response").html(result);
