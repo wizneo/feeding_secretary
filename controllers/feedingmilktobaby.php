@@ -61,6 +61,7 @@ class Feedingmilktobaby extends CI_Controller {
 		}
 		$input_data = $this->getInput();
 		print_r($input_data);
+		return;
 		$user_key = $input_data->user_key;
 		$type = $input_data->type;
 		$content = $input_data->content;
