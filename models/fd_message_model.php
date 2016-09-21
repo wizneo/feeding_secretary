@@ -27,11 +27,12 @@ class Fd_message_model extends CI_Model {
 	}
 	
 	public function cancel_feeding_hst($user_key) {
-		$sql = "SELECT no, msg_no FROM fd_feeding_hst WHERE user_key = ? AND use_yn = 'Y' ORDER BY no DESC LIMIT 1";
+		$sql = "SELECT no FROM fd_feeding_hst WHERE user_key = ? AND use_yn = 'Y' ORDER BY no DESC LIMIT 1";
 		$query = $this->db->query($sql, array($user_key));
 		$result_arr = $query->result();
 		$no = $result_arr[0]->no;
 
+		$this->db->flush_cache();
 		$this->db->set('use_yn', 'N');
 		$this->db->where('no', $no);
 		print_r($this->db->get_compiled_update());
