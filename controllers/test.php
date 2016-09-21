@@ -8,7 +8,7 @@ class Test extends CI_Controller {
 
 
 	public function index() {
-		echo date('Y-m-d', strtotime(date('Y-m-d').' -1 day'));
+		$this->message->cancel_feeding_hst('test_user_key');
 //		$output_data = array(
 //			'memo_list' => $this->memo->get_list(),
 //			);

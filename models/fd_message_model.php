@@ -15,13 +15,30 @@ class Fd_message_model extends CI_Model {
 	}
 	
 	public function get_today_total_amount($user_key) {
-		$sql = "SELECT sum(`amount`) as today_total_amount FROM `fd_feeding_hst` WHERE user_key = ? AND feeding_dtm BETWEEN ? AND ?";
+		$sql = "SELECT sum(`amount`) as today_total_amount FROM `fd_feeding_hst` WHERE use_yn = 'Y' AND user_key = ? AND feeding_dtm BETWEEN ? AND ?";
 		$query = $this->db->query($sql, array($user_key, date('Y-m-d'), date('Y-m-d', strtotime(date('Y-m-d').' +1 day'))));
 		$total_amount = 0;
-		foreach ($query->result() as $row) {
-			$total_amount += $row->today_total_amount;
-		}
+//		foreach ($query->result() as $row) {
+//			$total_amount += $row->today_total_amount;
+//		}
+		$result_arr = $query->result();
+		$total_amount = $result_arr[0]->today_total_amount;
 		return $total_amount;
+	}
+	
+	public function cancel_feeding_hst($user_key) {
+		$sql = "select no, msg_no from fd_feeding_hst where user_key = ? order by no desc limit 1";
+		$query = $this->db->query($sql, array($user_key));
+		$result_arr = $query->result();
+		$no = $result_arr[0]->no;
+		
+		$data = array(
+			'use_yn' => 'N'
+		);
+		$this->db->where('no', $no);
+		print_r($this->db->get_compiled_update());
+		return;
+		$this->db->update(self::$table_feeding_hst, $data);
 	}
 	
 	public function insert_message($data) {

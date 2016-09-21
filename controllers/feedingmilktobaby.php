@@ -64,6 +64,7 @@ class Feedingmilktobaby extends CI_Controller {
 		$type = $input_data->type;
 		$content = $input_data->content;
 		$out_message = "";
+		$analized_msg = null;
 		// 메세지 저장
 		$input_data = array(
 			'user_key' => $user_key,
@@ -72,30 +73,39 @@ class Feedingmilktobaby extends CI_Controller {
 		);
 		$this->message->insert_message($input_data);
 		
-		// 메세지 분석 
-		$analized_msg = $this->anaylize_message($content);
 
-		
-		if ($analized_msg['result'] == 'FAIL') {
-			// 메세지에서 명령어 구분
-			if (trim($content) == '야' || trim($content) == '수유비서') {
-				$out_message = $this->get_help_msg();
-			}
-			else {
-				$out_message = "인식할 수 없는 형태의 명령입니다. 명령의 예를 보려면 '야' 또는 '수유비서'라고 불러주세요.";
-			}
+		// 메세지에서 명령어가 있으면 명령어대로 실행
+		if (trim($content) == '수유비서') {
+			$out_message = $this->get_help_msg();
 		}
-		else {
-			// 수유 기록  저장
-			$hst_data = array(
-				'user_key' => $user_key,
-				'feeding_dtm' => $analized_msg['feeding_dtm'],
-				'amount' => $analized_msg['feeding_amount']
-			);
-			$this->message->insert_feeding_hst($hst_data);
-			$out_message = $analized_msg['feeding_dtm']."에 ".$analized_msg['feeding_amount']."ml 먹였군요!\n";// 이 기록을 취소하려면 '취소' 또는 '아니' 라고 해주세요.\n";
+		else if (trim($content) == '취소') {
+			$this->message->cancel_feeding_hst($user_key);
+			$out_message .= "취소했습니다.";
 			$today_total_amount = $this->message->get_today_total_amount($user_key);
 			$out_message .= "오늘 하루 총 수유량은 ".$today_total_amount."ml 입니다.";
+		}
+		else  {
+			// 메세지 분석 
+			$analized_msg = $this->anaylize_message($content);
+			if ($analized_msg['result'] == 'FAIL') {
+				$out_message = "인식할 수 없는 형태의 명령입니다. 명령의 예를 보려면 '야' 또는 '수유비서'라고 불러주세요.";
+			}
+			else {
+				// 수유 기록  저장
+				$hst_data = array(
+					'user_key' => $user_key,
+					'feeding_dtm' => $analized_msg['feeding_dtm'],
+					'amount' => $analized_msg['feeding_amount']
+				);
+				
+				$this->message->insert_feeding_hst($hst_data);
+				if ($analized_msg['additional_msg'] != '') {
+					$out_message .= $analized_msg['additional_msg']."\n";
+				}
+				$out_message .= $analized_msg['feeding_dtm']."에 ".$analized_msg['feeding_amount']."ml 먹었습니다.\n";// 이 기록을 취소하려면 취소 라고 해주세요.\n";
+				$today_total_amount = $this->message->get_today_total_amount($user_key);
+				$out_message .= "오늘 하루 총 수유량은 ".$today_total_amount."ml 입니다.";
+			}
 		}
 		
 		// 사용자를 채팅 중 상태로 변경
@@ -119,6 +129,7 @@ class Feedingmilktobaby extends CI_Controller {
 		$feeding_amount = 0;
 		$feeding_dtm = "";
 		$result = "";
+		$additional_msg = "";
 		if (count($matched_arr) > 0) {
 			$analized_msg_arr = preg_split("/[ 시분:]+/", $msg);
 			$feeding_hour = $analized_msg_arr[0];
@@ -126,6 +137,11 @@ class Feedingmilktobaby extends CI_Controller {
 			$feeding_dtm = date('Y-m-d ').$feeding_hour.':'.$feeding_min.':00';
 			$feeding_amount  = $analized_msg_arr[2];
 			$result = "SUCCESS";
+			
+			// 현재 시간 보다 큰 시간이면 어제 날짜로 인식
+			if (date('H', strtotime($analized_msg['feeding_dtm'])) > date('H')) {
+				$additional_msg = "시간을 보니 어제(".date('Y-m-d', strtotime(date('Y-m-d').' -1 day')).") 먹인 거로군요!";
+			}
 		}
 		else {
 			$result = "FAIL";
@@ -133,7 +149,8 @@ class Feedingmilktobaby extends CI_Controller {
 		return array(
 				'result' => $result,
 				'feeding_dtm' => $feeding_dtm,
-				'feeding_amount' => $feeding_amount
+				'feeding_amount' => $feeding_amount,
+				'additional_msg' => $additional_msg
 			);
 	}
 	
