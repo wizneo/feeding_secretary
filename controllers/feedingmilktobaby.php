@@ -80,9 +80,8 @@ class Feedingmilktobaby extends CI_Controller {
 		$analized_msg = $this->anaylize_message($content);
 		
 		print_r($analized_msg);
-		echo $analized_msg['result'];
-		echo 'FAIL';
-		echo $analized_msg['result'] == 'FAIL';
+		echo PHP_EOL."array access:".$analized_msg['result'].PHP_EOL;
+		echo 'FAIL'.PHP_EOL;
 		if ($analized_msg['result'] == 'FAIL') {
 			$out_message = "인식할 수 없는 형태의 명령입니다. 명령의 예를 보려면 '야' 또는 '수유비서'라고 불러주세요.";
 		}

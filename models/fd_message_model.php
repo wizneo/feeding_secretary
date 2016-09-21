@@ -12,7 +12,7 @@ class Fd_message_model extends CI_Model {
 	
 	public function insert_feeding_hst($data) {
 		$data['reg_dtm'] = date('Y-m-d H:i:s');
-		$data['msg_no'] = $this->get_max_no($data->user_key);
+		$data['msg_no'] = $this->get_max_no($data['user_key']);
 		$this->db->insert(self::$table_message, $data);
 	}
 	
