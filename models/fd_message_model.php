@@ -27,6 +27,7 @@ class Fd_message_model extends CI_Model {
 	}
 	
 	public function cancel_feeding_hst($user_key) {
+		echo $user_key.PHP_EOL;
 		$sql = "select no, msg_no from fd_feeding_hst where user_key = ? order by no desc limit 1";
 		$query = $this->db->query($sql, array($user_key));
 		$result_arr = $query->result();
