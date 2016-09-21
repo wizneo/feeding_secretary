@@ -79,14 +79,14 @@ class Feedingmilktobaby extends CI_Controller {
 		// 메세지 분석 
 		$analized_msg = $this->anaylize_message($content);
 		print_r($analized_msg);
-		if ($analized_msg->result == 'FAIL') {
+		if ($analized_msg['result'] == 'FAIL') {
 			$out_message = "인식할 수 없는 형태의 명령입니다. 명령의 예를 보려면 '야' 또는 '수유비서'라고 불러주세요.";
 		}
 		// 수유 기록  저장
 		$hst_data = array(
 			'user_key' => $user_key,
-			'feeding_dtm' => $analized_msg->feeding_dtm,
-			'amount' => $analized_msg->feeding_amount
+			'feeding_dtm' => $analized_msg['feeding_dtm'],
+			'amount' => $analized_msg['feeding_amount']
 		);
 		$this->message->insert_feeding_hst($hst_data);
 		
