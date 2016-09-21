@@ -8,6 +8,7 @@ class Test extends CI_Controller {
 
 
 	public function index() {
+		$this->message->get_today_total_amount('test_user_key');
 		$this->message->cancel_feeding_hst('test_user_key');
 //		$output_data = array(
 //			'memo_list' => $this->memo->get_list(),
