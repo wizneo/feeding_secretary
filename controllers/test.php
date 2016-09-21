@@ -8,7 +8,7 @@ class Test extends CI_Controller {
 
 
 	public function index() {
-		echo date('H', strtotime('2016-12-20 13:33:23'));
+		echo date('Y-m-d', strtotime(date('Y-m-d').' -1 day'));
 //		$output_data = array(
 //			'memo_list' => $this->memo->get_list(),
 //			);
