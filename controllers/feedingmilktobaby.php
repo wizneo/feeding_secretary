@@ -79,7 +79,6 @@ class Feedingmilktobaby extends CI_Controller {
 		// 메세지 분석 
 		$analized_msg = $this->anaylize_message($content);
 		
-		print_r($analized_msg);
 		if ($analized_msg['result'] == 'FAIL') {
 			$out_message = "인식할 수 없는 형태의 명령입니다. 명령의 예를 보려면 '야' 또는 '수유비서'라고 불러주세요.";
 		}
@@ -118,7 +117,7 @@ class Feedingmilktobaby extends CI_Controller {
 			$analized_msg_arr = preg_split("/[ 시분:]+/", $msg);
 			$feeding_hour = $analized_msg_arr[0];
 			$feeding_min  = $analized_msg_arr[1];
-			$feeding_dtm = date('Y-m-d ').$feeding_hour.':'.$feeding_min.':'.date(':00');
+			$feeding_dtm = date('Y-m-d ').$feeding_hour.':'.$feeding_min.':00';
 			$feeding_amount  = $analized_msg_arr[2];
 			$result = "SUCCESS";
 		}
