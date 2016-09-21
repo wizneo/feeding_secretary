@@ -34,13 +34,6 @@ class Fd_message_model extends CI_Model {
 		
 		$sql = "update fd_feeding_hst SET use_yn = 'N' WHERE no = ?";
 		$query = $this->db->query($sql, array($no));
-
-		return;
-		$this->db->flush_cache();
-		$this->db->set('use_yn', 'N');
-		$this->db->where('no', $no);
-		print_r($this->db->get_compiled_update());
-		$this->db->update(self::$table_feeding_hst);
 	}
 	
 	public function insert_message($data) {

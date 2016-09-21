@@ -139,7 +139,7 @@ class Feedingmilktobaby extends CI_Controller {
 			$result = "SUCCESS";
 			
 			// 현재 시간 보다 큰 시간이면 어제 날짜로 인식
-			if (date('H', strtotime($analized_msg['feeding_dtm'])) > date('H')) {
+			if ($feeding_hour > date('H')) {
 				$additional_msg = "시간을 보니 어제(".date('Y-m-d', strtotime(date('Y-m-d').' -1 day')).") 먹인 거로군요!";
 			}
 		}
