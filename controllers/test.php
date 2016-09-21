@@ -8,8 +8,8 @@ class Test extends CI_Controller {
 
 
 	public function index() {
-		$msg = "1:20 120";
-		print_r(preg_split("/[ 시분:]+/", $msg));
+		$date = date('Y-m-d', strtotime(date('Y-m-d').' +1 day'));
+		echo $date;
 //		$output_data = array(
 //			'memo_list' => $this->memo->get_list(),
 //			);
