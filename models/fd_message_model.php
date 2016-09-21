@@ -35,6 +35,7 @@ class Fd_message_model extends CI_Model {
 		$this->db->flush_cache();
 		$this->db->set('use_yn', 'N');
 		$this->db->where('no', $no);
+		echo "here";
 		print_r($this->db->get_compiled_update());
 		return;
 		$this->db->update(self::$table_feeding_hst);
