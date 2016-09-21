@@ -88,7 +88,7 @@ class Feedingmilktobaby extends CI_Controller {
 			// 메세지 분석 
 			$analized_msg = $this->anaylize_message($content);
 			if ($analized_msg['result'] == 'FAIL') {
-				$out_message = "인식할 수 없는 형태의 명령입니다. 명령의 예를 보려면 '야' 또는 '수유비서'라고 불러주세요.";
+				$out_message = "인식할 수 없는 형태의 명령입니다. 명령의 예를 보려면 '수유비서'라고 불러주세요.";
 			}
 			else {
 				// 수유 기록  저장
@@ -102,7 +102,7 @@ class Feedingmilktobaby extends CI_Controller {
 				if ($analized_msg['additional_msg'] != '') {
 					$out_message .= $analized_msg['additional_msg']."\n";
 				}
-				$out_message .= $analized_msg['feeding_dtm']."에 ".$analized_msg['feeding_amount']."ml 먹었습니다.\n";// 이 기록을 취소하려면 취소 라고 해주세요.\n";
+				$out_message .= $analized_msg['feeding_dtm']."에 ".$analized_msg['feeding_amount']."ml 먹었습니다.\n이 기록을 취소하려면 취소 라고 해주세요.\n";
 				$today_total_amount = $this->message->get_today_total_amount($user_key);
 				$out_message .= "오늘 하루 총 수유량은 ".$today_total_amount."ml 입니다.";
 			}
