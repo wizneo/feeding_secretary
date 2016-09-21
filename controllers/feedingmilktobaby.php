@@ -80,18 +80,18 @@ class Feedingmilktobaby extends CI_Controller {
 		$analized_msg = $this->anaylize_message($content);
 		
 		print_r($analized_msg);
-		echo PHP_EOL."array access:".$analized_msg['result'].PHP_EOL;
-		echo 'FAIL'.PHP_EOL;
 		if ($analized_msg['result'] == 'FAIL') {
 			$out_message = "인식할 수 없는 형태의 명령입니다. 명령의 예를 보려면 '야' 또는 '수유비서'라고 불러주세요.";
 		}
-		// 수유 기록  저장
-		$hst_data = array(
-			'user_key' => $user_key,
-			'feeding_dtm' => $analized_msg['feeding_dtm'],
-			'amount' => $analized_msg['feeding_amount']
-		);
-		$this->message->insert_feeding_hst($hst_data);
+		else {
+			// 수유 기록  저장
+			$hst_data = array(
+				'user_key' => $user_key,
+				'feeding_dtm' => $analized_msg['feeding_dtm'],
+				'amount' => $analized_msg['feeding_amount']
+			);
+			$this->message->insert_feeding_hst($hst_data);
+		}
 		
 		// 사용자를 채팅 중 상태로 변경
 		$this->user->join_user(array(
