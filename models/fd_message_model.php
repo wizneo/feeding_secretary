@@ -17,10 +17,11 @@ class Fd_message_model extends CI_Model {
 	public function get_today_total_amount($user_key) {
 		$sql = "SELECT sum(`amount`) as today_total_amount FROM `fd_feeding_hst` WHERE user_key = ? AND feeding_dtm BETWEEN ? AND ?";
 		$query = $this->db->query($sql, array($user_key, date('Y-m-d'), date('Y-m-d', strtotime(date('Y-m-d').' +1 day'))));
+		$total_amount = 0;
 		foreach ($query->result() as $row) {
-			echo $row->today_total_amount;
+			$total_amount += $row->today_total_amount;
 		}
-		
+		return $total_amount;
 	}
 	
 	public function insert_message($data) {
