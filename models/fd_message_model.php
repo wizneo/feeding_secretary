@@ -31,7 +31,7 @@ class Fd_message_model extends CI_Model {
 		$query = $this->db->query($sql, array($user_key));
 		$result_arr = $query->result();
 		$no = $result_arr[0]->no;
-		
+		echo $no;
 		$data = array(
 			'use_yn' => 'N'
 		);
