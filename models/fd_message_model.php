@@ -1,6 +1,7 @@
 <?php
 class Fd_message_model extends CI_Model {
 	private static $table_message = 'fd_message';
+	private static $table_feeding_hst = 'fd_feeding_hst';
 	public function __construct() {
 		parent::__construct();
 	}
@@ -13,7 +14,7 @@ class Fd_message_model extends CI_Model {
 	public function insert_feeding_hst($data) {
 		$data['reg_dtm'] = date('Y-m-d H:i:s');
 		$data['msg_no'] = $this->get_max_no($data['user_key']);
-		$this->db->insert(self::$table_message, $data);
+		$this->db->insert(self::$table_feeding_hst, $data);
 	}
 	
 	private function get_max_no($user_key) {
