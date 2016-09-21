@@ -108,6 +108,9 @@ class Feedingmilktobaby extends CI_Controller {
 	// 11:20 120
 	private function anaylize_message($msg) {
 		preg_match('/^[0-9]{2}:[0-9]{2} [0-9]{3}$/', $msg ,$matched_arr);
+		$feeding_amount;
+		$feeding_dtm;
+		$result;
 		if (count($matched_arr) > 0) {
 			$analized_msg_arr = preg_split("/[ 시분:]+/", $msg);
 			$feeding_hour = $analized_msg_arr[0];
