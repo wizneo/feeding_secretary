@@ -85,8 +85,8 @@ class Feedingmilktobaby extends CI_Controller {
 		// 수유 기록  저장
 		$hst_data = array(
 			'user_key' => $user_key,
-			'feeding_dtm' => $$analized_msg->$feeding_dtm,
-			'amount' => $$analized_msg->$feeding_amount
+			'feeding_dtm' => $analized_msg->feeding_dtm,
+			'amount' => $analized_msg->feeding_amount
 		);
 		$this->message->insert_feeding_hst($hst_data);
 		
