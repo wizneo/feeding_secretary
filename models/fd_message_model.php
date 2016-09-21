@@ -15,7 +15,7 @@ class Fd_message_model extends CI_Model {
 	}
 	
 	public function get_today_total_amount($user_key) {
-		$sql = "SELECT sum(`amount`) as today_total_amount FROM `fd_feeding_hst` WHERE use_yn = 'Y' AND user_key = ? AND feeding_dtm BETWEEN ? AND ?";
+		$sql = "SELECT sum(`amount`) as today_total_amount FROM fd_feeding_hst WHERE use_yn = 'Y' AND user_key = ? AND feeding_dtm BETWEEN ? AND ?";
 		$query = $this->db->query($sql, array($user_key, date('Y-m-d'), date('Y-m-d', strtotime(date('Y-m-d').' +1 day'))));
 		$total_amount = 0;
 //		foreach ($query->result() as $row) {
@@ -31,14 +31,12 @@ class Fd_message_model extends CI_Model {
 		$query = $this->db->query($sql, array($user_key));
 		$result_arr = $query->result();
 		$no = $result_arr[0]->no;
-		echo $no;
-		$data = array(
-			'use_yn' => 'N'
-		);
+
+		$this->db->set('use_yn', 'N');
 		$this->db->where('no', $no);
 		print_r($this->db->get_compiled_update());
 		return;
-		$this->db->update(self::$table_feeding_hst, $data);
+		$this->db->update(self::$table_feeding_hst);
 	}
 	
 	public function insert_message($data) {
