@@ -93,7 +93,8 @@ class Feedingmilktobaby extends CI_Controller {
 				'amount' => $analized_msg['feeding_amount']
 			);
 			$this->message->insert_feeding_hst($hst_data);
-			$out_message = $analized_msg['feeding_dtm']."에 ".$analized_msg['feeding_amount']."먹였군요! 이 기록을 취소하려면 '취소' 또는 '아니' 라고 해주세요.";
+			$out_message = $analized_msg['feeding_dtm']."에 ".$analized_msg['feeding_amount']."ml 먹였군요! 이 기록을 취소하려면 '취소' 또는 '아니' 라고 해주세요.\n";
+			$out_message .= "오늘 하루 총 수유량은 ".$this->message->get_today_total_amount($user_key)."ml 입니다.";
 		}
 		
 		// 사용자를 채팅 중 상태로 변경
