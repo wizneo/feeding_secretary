@@ -31,13 +31,15 @@ class Fd_message_model extends CI_Model {
 		$query = $this->db->query($sql, array($user_key));
 		$result_arr = $query->result();
 		$no = $result_arr[0]->no;
+		
+		$sql = "update fd_feeding_hst SET use_yn = 'N' WHERE no = ?";
+		$query = $this->db->query($sql, array($no));
 
+		return;
 		$this->db->flush_cache();
 		$this->db->set('use_yn', 'N');
 		$this->db->where('no', $no);
-		echo "here";
 		print_r($this->db->get_compiled_update());
-		return;
 		$this->db->update(self::$table_feeding_hst);
 	}
 	
