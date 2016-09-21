@@ -113,8 +113,8 @@ class Feedingmilktobaby extends CI_Controller {
 		echo json_encode($output_data);
 	}
 	
-	// 11:20 120
 	private function anaylize_message($msg) {
+		// 11:20 120
 		preg_match('/^[0-9]{2}:[0-9]{2} [0-9]{3}$/', $msg ,$matched_arr);
 		$feeding_amount = 0;
 		$feeding_dtm = "";

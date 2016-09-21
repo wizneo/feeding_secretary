@@ -8,7 +8,7 @@ class Test extends CI_Controller {
 
 
 	public function index() {
-		$this->message->get_today_total_amount('test_user_key');
+		echo date('H', strtotime('2016-12-20 13:33:23'));
 //		$output_data = array(
 //			'memo_list' => $this->memo->get_list(),
 //			);
