@@ -63,7 +63,7 @@ class Feedingmilktobaby extends CI_Controller {
 		$user_key = $input_data->user_key;
 		$type = $input_data->type;
 		$content = $input_data->content;
-		
+		$out_message = "";
 		// 메세지 저장
 		$input_data = array(
 			'user_key' => $user_key,
@@ -72,15 +72,18 @@ class Feedingmilktobaby extends CI_Controller {
 		);
 		$this->message->insert_message($input_data);
 		
-		// 메세지에서 명령어 구분
-		if (trim($content) == '야' || trim($content) == '수유비서') {
-			$out_message = $this->get_help_msg();
-		}
 		// 메세지 분석 
 		$analized_msg = $this->anaylize_message($content);
+
 		
 		if ($analized_msg['result'] == 'FAIL') {
-			$out_message = "인식할 수 없는 형태의 명령입니다. 명령의 예를 보려면 '야' 또는 '수유비서'라고 불러주세요.";
+			// 메세지에서 명령어 구분
+			if (trim($content) == '야' || trim($content) == '수유비서') {
+				$out_message = $this->get_help_msg();
+			}
+			else {
+				$out_message = "인식할 수 없는 형태의 명령입니다. 명령의 예를 보려면 '야' 또는 '수유비서'라고 불러주세요.";
+			}
 		}
 		else {
 			// 수유 기록  저장
@@ -90,6 +93,7 @@ class Feedingmilktobaby extends CI_Controller {
 				'amount' => $analized_msg['feeding_amount']
 			);
 			$this->message->insert_feeding_hst($hst_data);
+			$out_message = $analized_msg['feeding_dtm']."에 ".$analized_msg['feeding_amount']."먹였군요! 이 기록을 취소하려면 '취소' 또는 '아니' 라고 해주세요.";
 		}
 		
 		// 사용자를 채팅 중 상태로 변경
