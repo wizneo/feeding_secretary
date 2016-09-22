@@ -17,10 +17,6 @@ class Fd_message_model extends CI_Model {
 	public function get_today_total_amount($user_key) {
 		$sql = "SELECT sum(`amount`) as today_total_amount FROM fd_feeding_hst WHERE use_yn = 'Y' AND user_key = ? AND feeding_dtm BETWEEN ? AND ?";
 		$query = $this->db->query($sql, array($user_key, date('Y-m-d'), date('Y-m-d', strtotime(date('Y-m-d').' +1 day'))));
-		$total_amount = 0;
-//		foreach ($query->result() as $row) {
-//			$total_amount += $row->today_total_amount;
-//		}
 		$result_arr = $query->result();
 		$total_amount = $result_arr[0]->today_total_amount;
 		return $total_amount;
@@ -34,6 +30,13 @@ class Fd_message_model extends CI_Model {
 		
 		$sql = "update fd_feeding_hst SET use_yn = 'N' WHERE no = ?";
 		$query = $this->db->query($sql, array($no));
+	}
+
+	public function get_today_avg_term($user_key) {
+// 		$sql = "";
+// 		SELECT TIMESTAMPDIFF(HOUR, now(), DATE_ADD(now(),INTERVAL 1 HOUR)) dd ==> 1시간
+// 		SELECT TIMESTAMPDIFF(MINUTE, now(), DATE_ADD(now(),INTERVAL 1 HOUR)) dd ==> 60분
+// 		SELECT TIMESTAMPDIFF(SECOND, now(), DATE_ADD(now(),INTERVAL 1 HOUR)) dd ==> 3600초
 	}
 	
 	public function insert_message($data) {
