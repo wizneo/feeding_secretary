@@ -36,7 +36,6 @@ class Fd_message_model extends CI_Model {
 // 		$sql = "";
 // 		SELECT TIMESTAMPDIFF(HOUR, now(), DATE_ADD(now(),INTERVAL 1 HOUR)) dd ==> 1시간
 // 		SELECT TIMESTAMPDIFF(MINUTE, now(), DATE_ADD(now(),INTERVAL 1 HOUR)) dd ==> 60분
-// 		SELECT TIMESTAMPDIFF(SECOND, now(), DATE_ADD(now(),INTERVAL 1 HOUR)) dd ==> 3600초
 	}
 	
 	public function insert_message($data) {

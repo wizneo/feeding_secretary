@@ -1,5 +1,5 @@
 <?php
-class Feedingmilktobaby extends CI_Controller {
+class Feedingmilktobaby_test extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
  		$this->load->model('Fd_message_model','message',true);
@@ -125,7 +125,7 @@ class Feedingmilktobaby extends CI_Controller {
 	
 	private function anaylize_message($msg) {
 		// 11:20 120
-		preg_match('/^[0-9]{1,2}:[0-9]{1,2} +[0-9]+$/', $msg ,$matched_arr);
+		preg_match('/^[0-9]{1,2}:[0-9]{1,2} [0-9]{2,3}$/', $msg ,$matched_arr);
 		$feeding_amount = 0;
 		$feeding_dtm = "";
 		$result = "";
@@ -139,9 +139,8 @@ class Feedingmilktobaby extends CI_Controller {
 			$result = "SUCCESS";
 			
 			// 현재 시간 보다 큰 시간이면 어제 날짜로 인식
-			if ($feeding_hour > date('H') && $feeding_hour < 12 && date('H') < 12) {
+			if ($feeding_hour > date('H')) {
 				$additional_msg = "시간을 보니 어제(".date('Y-m-d', strtotime(date('Y-m-d').' -1 day')).") 먹인 거로군요!";
-				$feeding_dtm = date('Y-m-d', strtotime(date('Y-m-d').' -1 day'));
 			}
 		}
 		else {
