@@ -19,7 +19,15 @@ class Fd_message_model extends CI_Model {
 		$query = $this->db->query($sql, array($user_key, date('Y-m-d'), date('Y-m-d', strtotime(date('Y-m-d').' +1 day'))));
 		$result_arr = $query->result();
 		$total_amount = $result_arr[0]->today_total_amount;
-		return $total_amount;
+		return $total_amount == "" ? 0 : $total_amount;
+	}
+	
+	public function get_yesterday_total_amount($user_key) {
+		$sql = "SELECT sum(`amount`) as today_total_amount FROM fd_feeding_hst WHERE use_yn = 'Y' AND user_key = ? AND feeding_dtm BETWEEN ? AND ?";
+		$query = $this->db->query($sql, array($user_key, date('Y-m-d', strtotime(date('Y-m-d').' -1 day')), date('Y-m-d')));
+		$result_arr = $query->result();
+		$total_amount = $result_arr[0]->today_total_amount;
+		return $total_amount == "" ? 0 : $total_amount;
 	}
 	
 	public function cancel_feeding_hst($user_key) {

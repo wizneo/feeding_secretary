@@ -103,8 +103,15 @@ class Feedingmilktobaby extends CI_Controller {
 					$out_message .= $analized_msg['additional_msg']."\n";
 				}
 				$out_message .= $analized_msg['feeding_dtm']."에 ".$analized_msg['feeding_amount']."ml 먹었습니다.\n이 기록을 취소하려면 취소 라고 해주세요.\n";
-				$today_total_amount = $this->message->get_today_total_amount($user_key);
-				$out_message .= "오늘 하루 총 수유량은 ".$today_total_amount."ml 입니다.";
+				
+				if ($analized_msg['additional_msg'] != '') {
+					$yesterday_total_amount = $this->message->get_yesterday_total_amount($user_key);
+					$out_message .= "어제 하루 총 수유량은 ".$yesterday_total_amount."ml 입니다.";
+				}
+				else {
+					$today_total_amount = $this->message->get_today_total_amount($user_key);
+					$out_message .= "오늘 하루 총 수유량은 ".$today_total_amount."ml 입니다.";
+				}
 			}
 		}
 		
