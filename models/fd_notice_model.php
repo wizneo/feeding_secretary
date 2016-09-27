@@ -15,6 +15,7 @@ class Fd_notice_model extends CI_Model {
 			$notice = $result_arr[0]->notice;
 			if ($notice != "") {
 				$this->read_notice($user_key);
+				$notice .= "\n";
 			}
 		}
 		else {

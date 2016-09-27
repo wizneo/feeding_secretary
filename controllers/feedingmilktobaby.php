@@ -115,7 +115,7 @@ class Feedingmilktobaby extends CI_Controller {
 				}
 			}
 		}
-		$out_message = $this->notice->get_notice($user_key)."\n".$out_message;
+		$out_message = $this->notice->get_notice($user_key).$out_message;
 		
 		// 사용자를 채팅 중 상태로 변경
 		$this->user->join_user(array(
