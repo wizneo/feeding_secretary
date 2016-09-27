@@ -4,6 +4,7 @@ class Feedingmilktobaby extends CI_Controller {
 		parent::__construct();
  		$this->load->model('Fd_message_model','message',true);
  		$this->load->model('Fd_user_model','user',true);
+ 		$this->load->model('Fd_notice_model','notice',true);
 // 		$this->load->helper('url');
 	}
 
@@ -114,6 +115,7 @@ class Feedingmilktobaby extends CI_Controller {
 				}
 			}
 		}
+		$out_message = $this->notice->get_notice($user_key)."\n".$out_message;
 		
 		// 사용자를 채팅 중 상태로 변경
 		$this->user->join_user(array(
