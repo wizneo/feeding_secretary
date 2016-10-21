@@ -3,6 +3,7 @@
 ?>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src="<?=base_url();?>js/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
 var controller = {

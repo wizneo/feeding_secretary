@@ -146,12 +146,26 @@ class Feedingmilktobaby extends CI_Controller {
 			$feeding_dtm = date('Y-m-d ').$feeding_hour.':'.$feeding_min.':00';
 			$feeding_amount  = $analized_msg_arr[2];
 			$result = "SUCCESS";
+			// 입력시가 12보다 작을 경우, 입력시  + 12가 과거이면 +12 보정
+			if ($feeding_hour < 12
+				&& strtotime($feeding_dtm.' +12 hour') < time()) {
+				$feeding_hour += 12;
+				$feeding_dtm = date('Y-m-d ').$feeding_hour.':'.$feeding_min.':00';
+			}
 			
-			// 현재 시간 보다 큰 시간이면 어제 날짜로 인식
-			if ($feeding_hour > date('H') && $feeding_hour < 12 && date('H') < 12) {
-				$additional_msg = "시간을 보니 어제(".date('Y-m-d', strtotime(date('Y-m-d').' -1 day')).") 먹인 거로군요!";
-				$feeding_hour = intval($feeding_hour) + 12;
-				$feeding_dtm = date('Y-m-d', strtotime(date('Y-m-d').' -1 day'))." ".$feeding_hour.':'.$feeding_min.':00';
+			// 입력시가 미래이면 어제 날짜로 보정
+			if (strtotime($feeding_dtm) > time()) {
+				if ($feeding_hour <= 12) {
+					$feeding_hour += 12;
+				}
+				if ($feeding_hour >= 24) {
+					$feeding_hour -= 24;
+				}
+				$feeding_dtm = date('Y-m-d ').$feeding_hour.':'.$feeding_min.':00';
+				if ($feeding_hour > 12) {
+					$additional_msg = "시간을 보니 어제(".date('Y-m-d', strtotime(date('Y-m-d').' -1 day')).") 먹인 거로군요!";
+					$feeding_dtm = date('Y-m-d', strtotime(date('Y-m-d').' -1 day'))." ".$feeding_hour.':'.$feeding_min.':00';
+				}
 			}
 		}
 		else {

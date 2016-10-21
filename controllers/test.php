@@ -8,7 +8,8 @@ class Test extends CI_Controller {
 
 
 	public function index() {
-		$this->message->cancel_feeding_hst('test_user_key');
+		echo "현재dtm".date('Y-m-d H:i:s').PHP_EOL;;
+// 		$this->message->cancel_feeding_hst('test_user_key');
 //		$output_data = array(
 //			'memo_list' => $this->memo->get_list(),
 //			);
